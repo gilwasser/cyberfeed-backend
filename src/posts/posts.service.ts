@@ -28,4 +28,12 @@ export class PostsService {
     const createdPost = new this.PostModel(post);
     return createdPost.save();
   }
+
+  getPostsByPage(page: number, size: number) {
+    return this.PostModel.find()
+      .sort({ date: -1 })
+      .skip(page > 0 ? (page - 1) * size : 0)
+      .limit(size)
+      .populate('user');
+  }
 }
