@@ -36,4 +36,9 @@ export class PostsService {
       .limit(size)
       .populate('user');
   }
+
+  async likePost(id: string) {
+    console.log(id);
+    this.PostModel.updateOne({ _id: id }, { $inc: { likes: 1 } }).exec();
+  }
 }

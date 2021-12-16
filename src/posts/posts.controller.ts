@@ -5,12 +5,13 @@ import {
   NotFoundException,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private postService: PostsService) { }
+  constructor(private postService: PostsService) {}
 
   @Post('user')
   createUser(@Body() user) {
@@ -32,5 +33,12 @@ export class PostsController {
       }
       return posts;
     });
+  }
+
+  @Put('like/:id')
+  likePost(@Param('id') id) {
+    console.log(id);
+    this.postService.likePost(id);
+    return;
   }
 }
